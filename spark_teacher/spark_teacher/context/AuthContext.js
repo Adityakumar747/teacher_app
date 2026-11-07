@@ -135,6 +135,22 @@ export const AuthProvider = ({ children }) => {
           emailVerified: firebaseUser.emailVerified 
         };
       } else {
+        // Fallback: If Firebase exchange fails on backend, attempt direct backend credentials login
+        console.warn('Firebase token exchange rejected, trying direct backend login fallback...');
+        try {
+          const directRes = await ApiService.login(email.trim(), password);
+          if (directRes && directRes.success) {
+            const userData = directRes.data.user;
+            const token = directRes.data.token;
+            await AsyncStorage.setItem('authToken', token);
+            setUser(userData);
+            setIsAuthenticated(true);
+            return { success: true, user: userData, emailVerified: true };
+          }
+        } catch (directErr) {
+          console.warn('Direct backend login fallback failed:', directErr);
+        }
+
         // If backend fails, sign out from Firebase
         await signOut(auth);
         return { 
@@ -144,6 +160,21 @@ export const AuthProvider = ({ children }) => {
         };
       }
     } catch (error) {
+      // Fallback: If Firebase sign-in itself failed, attempt direct backend login before showing error
+      try {
+        const directRes = await ApiService.login(email.trim(), password);
+        if (directRes && directRes.success) {
+          const userData = directRes.data.user;
+          const token = directRes.data.token;
+          await AsyncStorage.setItem('authToken', token);
+          setUser(userData);
+          setIsAuthenticated(true);
+          return { success: true, user: userData, emailVerified: true };
+        }
+      } catch (directErr) {
+        // Continue to regular error handling
+      }
+
       console.error('Login error:', error);
       let errorMessage = 'Incorrect email or password. Please try again.';
       

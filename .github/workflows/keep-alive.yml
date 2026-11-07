@@ -1,0 +1,24 @@
+name: Render Keep-Alive Ping
+
+on:
+  schedule:
+    # Runs every 10 minutes to prevent Render free tier from sleeping (15 min idle threshold)
+    - cron: '*/10 * * * *'
+  workflow_dispatch: # Allows manual trigger from GitHub Actions dashboard anytime
+
+jobs:
+  ping:
+    name: Ping Render Health Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Keep-Alive Request
+        run: |
+          echo "Sending keep-alive ping to Render at $(date -u)..."
+          RESPONSE=$(curl -s -w "\nHTTP_CODE:%{http_code}" --max-time 60 "https://sparkology-backend-3zea.onrender.com/health")
+          echo "Response:"
+          echo "$RESPONSE"
+          if echo "$RESPONSE" | grep -q "HTTP_CODE:200"; then
+            echo "Render backend is alive and healthy!"
+          else
+            echo "Ping delivered to Render."
+          fi

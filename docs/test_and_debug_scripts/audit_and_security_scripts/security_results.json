@@ -1,0 +1,114 @@
+[
+  {
+    "category": "BFLA",
+    "testName": "Teacher cannot create school (Admin route)",
+    "passed": true,
+    "severity": "HIGH",
+    "details": "Status: 403 (\"Access denied. Admin privileges required.\")"
+  },
+  {
+    "category": "BFLA",
+    "testName": "Teacher cannot approve leave (Admin privilege)",
+    "passed": true,
+    "severity": "HIGH",
+    "details": "Status: 403"
+  },
+  {
+    "category": "BFLA",
+    "testName": "Teacher cannot view student notifications",
+    "passed": true,
+    "severity": "MEDIUM",
+    "details": "Status: 403"
+  },
+  {
+    "category": "BOLA",
+    "testName": "Teacher cannot access another teacher classes-today",
+    "passed": true,
+    "severity": "HIGH",
+    "details": "Status: 403 (Access denied. You can only view your own schedule.)"
+  },
+  {
+    "category": "BOLA",
+    "testName": "Teacher cannot delete foreign homework",
+    "passed": true,
+    "severity": "HIGH",
+    "details": "Status: 404 (Assignment not found)"
+  },
+  {
+    "category": "NoSQL",
+    "testName": "Reject NoSQL operator in login body",
+    "passed": true,
+    "severity": "CRITICAL",
+    "details": "Status: 400 (Validation failed)"
+  },
+  {
+    "category": "NoSQL",
+    "testName": "Prevent NoSQL operator injection in query params",
+    "passed": false,
+    "severity": "HIGH",
+    "details": "Status: 500 (Handled gracefully)"
+  },
+  {
+    "category": "Validation",
+    "testName": "Malformed ObjectId handling (No stack trace leak)",
+    "passed": true,
+    "severity": "MEDIUM",
+    "details": "Status: 500, Stack trace leaked: false"
+  },
+  {
+    "category": "Validation",
+    "testName": "Reject negative totalMarks in homework",
+    "passed": false,
+    "severity": "MEDIUM",
+    "details": "Status: 404 (Subject not found or you do not teach this subject)"
+  },
+  {
+    "category": "Attendance",
+    "testName": "Reject future date attendance submission",
+    "passed": true,
+    "severity": "CRITICAL",
+    "details": "Status: 400 (Cannot mark attendance for future dates.)"
+  },
+  {
+    "category": "Attendance",
+    "testName": "Lock attendance edits beyond 7-day window",
+    "passed": true,
+    "severity": "HIGH",
+    "details": "Status: 403 (Edit window closed. Attendance for sessions older than 7 days is locked and cannot be modified.)"
+  },
+  {
+    "category": "Attendance",
+    "testName": "Idempotent bulk attendance upsert",
+    "passed": true,
+    "severity": "CRITICAL",
+    "details": "First: 200, Second: 200 (Updated to Absent cleanly)"
+  },
+  {
+    "category": "Attendance",
+    "testName": "Handle duplicate students in bulk payload",
+    "passed": true,
+    "severity": "HIGH",
+    "details": "Status: 400 (Upsert handles duplicate deduplication)"
+  },
+  {
+    "category": "DoS",
+    "testName": "Rate limiting enabled on public endpoints",
+    "passed": false,
+    "severity": "HIGH",
+    "details": "20 rapid requests returned status 429: false (Rate limiter is commented out in index.js)"
+  },
+  {
+    "category": "CORS",
+    "testName": "CORS reflects arbitrary origin with credentials",
+    "passed": false,
+    "severity": "HIGH",
+    "details": "Allow-Origin: \"https://malicious-attacker-site.com\", Allow-Credentials: \"true\" (Vulnerable if reflects any origin)"
+  },
+  {
+    "category": "Secrets",
+    "testName": "Committed credentials in workspace (.env & serviceAccountKey)",
+    "passed": false,
+    "severity": "ACCEPTED_RISK",
+    "details": ".env exists: true, serviceAccountKey exists: true (Documented accepted decision for demo evaluation)"
+  }
+]

@@ -1,0 +1,28 @@
+services:
+  - type: web
+    name: sparkology-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node index.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        value: mongodb+srv://adityakumar746302_db_user:NvqKaZdUs87Jnr28@teacherapp.ytiyarr.mongodb.net/erp?retryWrites=true&w=majority
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRE
+        value: 7d
+      - key: CLOUDINARY_CLOUD_NAME
+        value: ejoblc6b
+      - key: CLOUDINARY_API_KEY
+        value: 361795646498279
+      - key: CLOUDINARY_API_SECRET
+        value: IJxN54api3g569kKqZBcPBVX1kQ
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 300
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+

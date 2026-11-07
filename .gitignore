@@ -1,0 +1,36 @@
+# Dependencies
+**/node_modules/
+node_modules/
+
+# Expo and Metro
+**/.expo/
+.expo/
+*.log
+metro-error*.json
+
+# IDE
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Config and credentials
+**/serviceAccountKey.json
+serviceAccountKey.json
+*.bak
+.env
+*.env
+config.env
+.env*.local
+
+# Archives & Binaries
+*.zip
+*.apk
+dist/
+web-build/
+
+# Verification scripts and temporary tokens
+docs/verify-scripts/
+*.token.json

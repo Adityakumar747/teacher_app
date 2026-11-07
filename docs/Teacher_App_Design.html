@@ -1,0 +1,211 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Teacher App Design</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:light;--navy:#0B1F4F;--mut:#4A5675;--bg:#F4F6FB;--soft:#E4EBFB;--green:#12794A;--red:#C0392B;--blue:#1D3FA6}
+*{box-sizing:border-box;font-family:Manrope,sans-serif}
+body{margin:0;background:#dfe4ef;padding:12px 0 24px}
+button{font:inherit;border:0;cursor:pointer}
+.l{text-align:center;font-weight:700;font-size:13px;color:var(--mut);margin:8px 0}
+.s{position:relative;width:390px;max-width:100%;height:844px;margin:0 auto 24px;background:var(--bg);border-radius:28px;overflow:hidden;padding:16px;color:var(--navy)}
+h1{margin:0;font-size:24px;font-weight:800;height:44px;line-height:44px}
+.nav{position:absolute;left:16px;right:16px;bottom:16px;height:64px;background:#fff;border-radius:22px;box-shadow:0 6px 24px rgba(11,31,79,.12);display:flex;align-items:center;justify-content:space-around}
+.nav a{width:56px;height:44px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:var(--mut)}
+.nav a.on{background:var(--soft);color:var(--navy)}
+.nav svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.hero{margin-top:12px;background:var(--navy);border-radius:22px;padding:18px;color:#fff}
+.st{display:flex;gap:8px;margin-top:16px}.st div{flex:1;background:rgba(255,255,255,.1);border-radius:14px;padding:10px 12px}
+.st b{display:block;font-size:22px;font-weight:800}.st span{font-size:12px;color:#C9D4F0}
+.list{margin-top:12px;background:#fff;border-radius:20px;overflow:hidden}
+.row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid #EEF1F7}
+.av{width:40px;height:40px;border-radius:20px;background:var(--soft);font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center}
+.nm{flex:1}.nm b{display:block;font-size:15px}.nm span{font-size:12px;color:var(--mut)}
+.seg{display:flex;background:#EEF1F7;border-radius:14px;padding:3px}
+.seg button{height:38px;width:74px;border-radius:11px;font-size:13px;font-weight:700;background:transparent;color:var(--mut)}
+.seg button.p.on{background:var(--green);color:#fff}.seg button.a.on{background:var(--red);color:#fff}
+.save{position:absolute;left:16px;right:16px;bottom:92px;height:52px;border-radius:16px;background:var(--blue);color:#fff;font-size:15px;font-weight:800;box-shadow:0 8px 20px rgba(29,63,166,.3)}
+.dd{position:relative;margin-top:8px}
+.dd>button{width:100%;height:56px;background:#fff;border-radius:16px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-size:16px;font-weight:800;color:var(--navy);box-shadow:0 2px 10px rgba(11,31,79,.06)}
+.dd>button small{display:block;font-size:11px;color:var(--mut);font-weight:700;text-align:left}
+.dd svg{width:20px;height:20px;fill:none;stroke:var(--navy);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.dd.open svg{transform:rotate(180deg)}
+.menu{display:none;position:absolute;z-index:5;top:62px;left:0;right:0;background:#fff;border-radius:16px;padding:6px;box-shadow:0 12px 32px rgba(11,31,79,.2)}
+.dd.open .menu{display:block}
+.menu button{width:100%;height:48px;background:none;border-radius:12px;padding:0 12px;display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:700;color:var(--navy)}
+.menu button.sel{background:var(--soft)}.menu span{font-size:12px;color:var(--mut)}
+.tabs{display:flex;background:var(--soft);border-radius:14px;padding:4px;margin-top:14px;font-size:13px;font-weight:700;text-align:center}
+.tabs span{flex:1;padding:10px;color:var(--mut)}.tabs .on{background:#fff;border-radius:11px;color:var(--navy)}
+.cr{margin-top:14px;background:var(--navy);border-radius:22px;padding:16px;color:#fff}
+.cr div{display:flex;gap:8px;margin-top:12px}.cr button{flex:1;background:rgba(255,255,255,.12);color:#fff;padding:14px 4px;border-radius:14px;font-size:13px;font-weight:700}
+.card{background:#fff;border-radius:20px;padding:16px;margin-top:10px}
+.card .t{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.card b{font-size:16px}.card small{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+.tag{font-size:12px;font-weight:700;padding:6px 10px;border-radius:10px;white-space:nowrap}
+.bar{height:6px;border-radius:3px;background:var(--soft);margin-top:14px}.bar i{display:block;height:6px;border-radius:3px;background:var(--green)}
+.cap{font-size:12px;color:var(--mut);margin-top:8px}
+.sc{position:absolute;inset:0;overflow-y:auto;padding:16px 16px 96px}
+.hd{display:flex;align-items:center;gap:12px;height:48px}
+.ava{width:44px;height:44px;border-radius:22px;background:var(--navy);color:#fff;font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.bell{margin-left:auto;width:44px;height:44px;border-radius:22px;background:#fff;display:flex;align-items:center;justify-content:center;position:relative}
+.bell svg{width:22px;height:22px;fill:none;stroke:var(--navy);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.bell i{position:absolute;top:10px;right:11px;width:9px;height:9px;border-radius:5px;background:#E5484D;border:2px solid #fff}
+.h2{position:relative;overflow:hidden;margin-top:14px;background:linear-gradient(160deg,#0B1F4F,#12308A);border-radius:26px;padding:18px;color:#fff}
+.h2:before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:100px;border:1px solid rgba(255,255,255,.12)}
+.h2:after{content:"";position:absolute;right:-20px;top:-20px;width:120px;height:120px;border-radius:60px;border:1px solid rgba(255,255,255,.12)}
+.go{position:relative;z-index:1;width:100%;height:52px;margin-top:16px;border-radius:16px;background:#fff;color:var(--navy);font-size:15px;font-weight:800}
+.pt{display:flex;gap:6px;margin-top:10px}
+.pt div{flex:1;background:#fff;border-radius:14px;padding:10px 4px 9px;text-align:center}
+.pt b{display:block;font-size:13px}.pt span{display:block;font-size:11px;color:var(--mut);margin-top:1px}.pt i{display:block;height:4px;border-radius:2px;margin:8px 8px 0}
+.kp{display:flex;gap:8px;margin-top:10px}
+.kp div{flex:1;background:#fff;border-radius:18px;padding:12px}
+.kp b{display:block;font-size:22px;font-weight:800}.kp span{font-size:12px;color:var(--mut)}
+.at{display:flex;align-items:center;gap:12px;background:#fff;border-radius:18px;padding:14px;margin-top:8px}
+.at .ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.at .tx{flex:1}.at .tx b{display:block;font-size:14px}.at .tx span{font-size:12px;color:var(--mut)}
+.at button{height:40px;padding:0 14px;border-radius:12px;background:var(--soft);color:var(--blue);font-size:13px;font-weight:800}
+.sh{font-size:15px;font-weight:800;margin-top:18px}
+.tlw{margin-top:2px}
+.ti{display:flex;gap:8px;margin-top:8px}
+.tm{width:42px;padding-top:12px}.tm b{display:block;font-size:13px}.tm span{font-size:11px;color:var(--mut)}
+.dt{position:relative;width:14px;flex:none}
+.dt:before{content:"";position:absolute;left:6px;top:0;bottom:-8px;width:2px;background:#D5DCEC}
+.ti:first-child .dt:before{top:20px}.ti:last-child .dt:before{bottom:auto;height:20px}
+.dt i{position:absolute;left:0;top:14px;width:14px;height:14px;border-radius:7px;border:2px solid var(--bg)}
+.tc{flex:1;background:#fff;border-radius:16px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tc b{font-size:15px}.tc small{display:block;font-size:12px;color:var(--mut);margin-top:2px}
+.tc.now{background:var(--soft);outline:1.5px solid var(--blue)}
+.pc{background:linear-gradient(160deg,#081742,#0E2670);border-radius:26px;padding:20px;text-align:center;color:#fff}
+.pav{width:88px;height:88px;border-radius:44px;margin:0 auto;border:3px solid #4C7DFF;display:flex;align-items:center;justify-content:center;background:#E4EBFB;color:var(--navy);font-size:28px;font-weight:800}
+.pill{display:inline-block;margin-top:12px;background:rgba(255,255,255,.2);padding:8px 14px;border-radius:14px;font-size:13px;font-weight:700}
+.pst{display:flex;margin-top:20px}
+.pst div{flex:1}
+.pst b{display:block;font-size:22px;font-weight:800;color:#fff}.pst span{font-size:12px;color:#E3EAFB}
+.sec{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--mut);font-weight:700;margin:22px 0 8px}
+.sec:after{content:"";flex:1;height:1px;background:#D5DCEC}
+.wc{background:#fff;border-radius:18px;overflow:hidden}
+.ln{display:flex;align-items:center;gap:12px;padding:14px;border-bottom:1px solid #EEF1F7}.ln:last-child{border:0}
+.ln b{display:block;font-size:15px}.ln small{font-size:12px;color:var(--mut)}.ln .r{margin-left:auto;color:var(--mut);font-size:18px}
+.cc{display:flex;gap:8px;overflow-x:auto;margin:12px 0}
+.cc span{flex:none;padding:9px 14px;border-radius:12px;background:#EEF1F7;font-size:13px;font-weight:700}.cc .on{background:var(--navy);color:#fff}
+.lv{flex:1;background:#fff;border-radius:18px;padding:14px}.lv b{font-size:24px;font-weight:800}.lv span{font-size:12px;color:var(--mut)}
+.btn{width:100%;height:52px;border-radius:16px;background:var(--blue);color:#fff;font-weight:800;font-size:15px;margin-top:10px}
+.ico{width:22px;height:22px;fill:none;stroke:var(--navy);stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.sd{width:12px;height:12px;border-radius:6px;flex:none}
+.lg{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--mut);font-weight:600;margin-top:12px}.lg span{display:flex;align-items:center;gap:6px}.lg i{width:8px;height:8px;border-radius:4px}
+.ent{display:flex;align-items:center;gap:14px;width:100%;text-align:left;background:#fff;border-radius:18px;padding:14px;margin-top:8px;color:var(--navy)}
+.ent .ib{width:44px;height:44px;border-radius:14px;background:var(--soft);display:flex;align-items:center;justify-content:center;flex:none}
+.ent b{display:block;font-size:15px}.ent small{font-size:12px;color:var(--mut)}.ent .r{margin-left:auto;color:var(--mut);font-size:22px}
+.ov{display:none;position:absolute;inset:0;z-index:30;background:var(--bg)}.ov.open{display:block}.ov .sc{padding-bottom:24px}
+.oh{display:flex;align-items:center;gap:12px;height:48px}.oh b{display:block;font-size:20px;font-weight:800}.oh small{font-size:12px;color:var(--mut)}
+.back{width:44px;height:44px;border-radius:22px;background:#fff;font-size:22px;color:var(--navy)}
+.srch{margin-top:14px;height:48px;background:#fff;border-radius:14px;display:flex;align-items:center;gap:10px;padding:0 14px}
+.srch input{flex:1;border:0;outline:0;font-size:14px;background:none;color:var(--navy)}
+.ft{display:flex;gap:8px;margin-top:10px}.ft button{flex:1;background:#fff;border-radius:16px;padding:12px 4px;font-size:12px;font-weight:700;color:var(--navy);display:flex;flex-direction:column;align-items:center;gap:6px}
+.stu{border-bottom:1px solid #EEF1F7}.stu:last-child{border:0}.stu.open{background:#FAFBFE}
+.sr{display:flex;align-items:center;gap:12px;padding:14px;cursor:pointer}.sr b{display:block;font-size:15px}.sr small{font-size:12px;color:var(--mut)}
+.acts{display:none;gap:6px;padding:0 14px 14px;flex-wrap:wrap}.stu.open .acts{display:flex}
+.acts button{height:38px;padding:0 14px;border-radius:12px;background:var(--soft);color:var(--blue);font-size:13px;font-weight:700}
+.ty{display:flex;gap:6px;background:#EEF1F7;border-radius:14px;padding:3px}.ty button{flex:1;height:40px;border-radius:11px;background:none;font-size:13px;font-weight:700;color:var(--mut)}.ty button.on{background:var(--navy);color:#fff}
+.fl{display:block;font-size:12px;font-weight:700;color:var(--mut);margin:12px 0 6px}
+.in{width:100%;height:46px;border:1px solid #D5DCEC;border-radius:12px;padding:0 12px;font-size:14px;color:var(--navy);background:#fff}
+textarea.in{height:76px;padding:10px 12px;resize:none}
+</style></head><body>
+<div class="l">Home</div>
+<div class="s" id="home"><div class="sc">
+ <div class="hd"><div class="ava">PS</div><div><div style="font-size:12px;color:var(--mut);font-weight:600">Good morning</div><div style="font-size:18px;font-weight:800">Ms. Priya Sharma</div></div><div class="bell"><svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 1112 0v6l1.5 2h-15zM10 21h4"/></svg><i></i></div></div>
+ <div class="h2"><div style="position:relative;z-index:1;display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:700;background:rgba(255,255,255,.14);padding:6px 10px;border-radius:10px">Happening now</span><span style="font-size:12px;color:#C9D4F0;font-weight:600">Mon, 2 Nov</span></div>
+ <div style="position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-top:16px"><div style="position:relative;width:88px;height:88px;flex:none"><svg viewBox="0 0 88 88" width="88" height="88" aria-hidden="true"><circle cx="44" cy="44" r="36" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="8"/><circle cx="44" cy="44" r="36" fill="none" stroke="#7FE0A8" stroke-width="8" stroke-linecap="round" stroke-dasharray="226.2" stroke-dashoffset="160" transform="rotate(-90 44 44)"/></svg><div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center"><b style="font-size:24px;font-weight:800;line-height:1">32</b><span style="font-size:11px;color:#C9D4F0">min left</span></div></div>
+ <div><div style="font-size:28px;font-weight:800;line-height:1.1">Class 8-B</div><div style="font-size:13px;color:#C9D4F0;margin-top:4px">Mathematics · Period 4</div><div style="font-size:13px;color:#C9D4F0">11:30 – 12:15 · 32 students</div></div></div>
+ <button class="go">Take attendance  →</button></div>
+ <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:20px"><b style="font-size:15px">Today's schedule</b><span style="font-size:12px;color:var(--mut);font-weight:600">5 classes · 2 taken</span></div>
+ <div class="tlw"><div class="ti"><div class="tm"><b>08:00</b><span>08:45</span></div><div class="tc"><div><b>Mathematics</b><small>8-A · 32 students</small></div><i class="sd" style="background:#12794A;box-shadow:0 0 0 4px #12794A33"></i></div></div><div class="ti"><div class="tm"><b>09:00</b><span>09:45</span></div><div class="tc"><div><b>Mathematics</b><small>9-B · 30 students</small></div><i class="sd" style="background:#E5484D;box-shadow:0 0 0 4px #E5484D33"></i></div></div><div class="ti"><div class="tm"><b>10:15</b><span>11:00</span></div><div class="tc"><div><b>Mathematics</b><small>10-A · 34 students</small></div><i class="sd" style="background:#12794A;box-shadow:0 0 0 4px #12794A33"></i></div></div><div class="ti"><div class="tm"><b>11:30</b><span>12:15</span></div><div class="tc now"><div><b>Mathematics</b><small>8-B · 32 students</small></div><i class="sd" style="background:#E8A317;box-shadow:0 0 0 4px #E8A31733"></i></div></div><div class="ti"><div class="tm"><b>14:00</b><span>14:45</span></div><div class="tc"><div><b>Mathematics</b><small>9-A · 31 students</small></div><i class="sd" style="background:#B7C0D3;box-shadow:0 0 0 4px #B7C0D333"></i></div></div></div>
+ <div class="sh">Needs your attention</div>
+ <div class="at"><div class="ic" style="background:#FDE3E0;color:#9B1C1C">!</div><div class="tx"><b>9-B attendance missed</b><span>Period 2 · 09:00</span></div><button>Mark now</button></div>
+ <div class="at"><div class="ic" style="background:#FDF0D0;color:#7A4B00">5</div><div class="tx"><b>Quadratic equations · Ex 4.2</b><span>10-A · 5 submissions to review</span></div><button>Review</button></div>
+ <div class="at"><div class="ic" style="background:#E4EBFB;color:#1D3FA6">29</div><div class="tx"><b>Mensuration practice</b><span>8-B · Due today · 29 / 32</span></div><button>Open</button></div>
+</div>
+ <nav class="nav" aria-label="Main"><a href="#" class="on" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></a><a href="#" aria-label="Attendance"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></a><a href="#" aria-label="Assignments"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6"/></svg></a><a href="#" aria-label="Profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a></nav>
+</div>
+<div class="l">1 · Attendance</div>
+<div class="s" id="att">
+ <h1>Attendance</h1>
+ <div class="hero"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div><div style="font-size:26px;font-weight:800">Class 8-B</div><div style="font-size:13px;color:#C9D4F0;margin-top:2px">Mathematics · Period 4 · 11:30–12:15</div></div><div style="font-size:12px;font-weight:700;background:rgba(255,255,255,.14);padding:6px 10px;border-radius:10px">Ongoing</div></div>
+ <div class="st"><div><b id="cp">24</b><span>Present</span></div><div><b id="ca">3</b><span>Absent</span></div><div><b>5</b><span>Not marked</span></div></div></div>
+ <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;height:36px"><b style="font-size:15px">Students · 32</b><button onclick="S.forEach(function(s){s[3]=1});drawRows()" style="height:36px;padding:0 12px;border-radius:12px;background:var(--soft);color:var(--blue);font-size:13px;font-weight:800">Mark all present</button></div>
+ <div class="list" id="rows" style="margin-top:6px"></div>
+ <button class="save">Save attendance · 27 of 32 marked</button>
+ <nav class="nav" aria-label="Main"><a href="#" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></a><a href="#" class="on" aria-label="Attendance"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></a><a href="#" aria-label="Assignments"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6"/></svg></a><a href="#" aria-label="Profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a></nav>
+</div>
+<div class="l">2 · Assignments</div>
+<div class="s" id="asg">
+ <h1>Assignments</h1>
+ <div class="dd" id="dd"><button id="ddb" aria-haspopup="listbox"><span><small>SELECT CLASS</small><span id="ddv">Class 8-B</span></span><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="menu" id="menu" role="listbox"></div></div>
+ <div class="tabs"><span class="on">Active</span><span>Past</span><span>Drafts</span></div>
+ <div class="cr"><b id="crt" style="font-size:16px">New homework for 8-B</b><div><button>Upload file</button><button>Take photo</button><button>Gallery</button></div></div>
+ <div id="cards"></div>
+ <nav class="nav" aria-label="Main"><a href="#" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></a><a href="#" aria-label="Attendance"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></a><a href="#" class="on" aria-label="Assignments"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6"/></svg></a><a href="#" aria-label="Profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a></nav>
+</div>
+<div class="l">Profile</div>
+<div class="s" id="prof"><div class="sc">
+ <div class="pc"><div class="pav">PS</div><div style="font-size:22px;font-weight:800;margin-top:12px">Ms. Priya Sharma</div><div style="font-size:13px;color:#E3EAFB;margin-top:2px">Mathematics Teacher</div><span class="pill">Spark International Academy</span>
+ <div class="pst"><div><b>5</b><span>Classes assigned</span></div><div><b>1</b><span>Subject teaching</span></div><div><b>25</b><span>Slots per week</span></div></div></div>
+ <div class="sec">My class</div>
+ <div class="wc"><div class="ln"><div><b>Grade 8 - B</b><small>Room 204 · 32 students</small></div><span class="tag" style="margin-left:auto;background:#E4EBFB;color:#1D3FA6">Class Teacher</span></div></div>
+ <div class="sec">Quick access</div>
+ <button class="ent" data-open="ovS"><div class="ib"><svg class="ico" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-3.5 3-5.5 7-5.5s7 2 7 5.5M16 4.5a3.5 3.5 0 010 7M18 14.5c2.5.6 4 2.3 4 5"/></svg></div><div><b>Students</b><small>Grade 8-B · 32 students</small></div><span class="r">›</span></button>
+ <button class="ent" data-open="ovL"><div class="ib"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><div><b>Leave</b><small>8 casual left · 1 request pending</small></div><span class="r">›</span></button>
+ <div class="sec">Contact</div>
+ <div class="wc"><div class="ln"><svg class="ico" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg><b style="font-size:14px">+91 98765 43210</b></div><div class="ln"><svg class="ico" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><b style="font-size:14px">priya.sharma@spark.edu</b></div><div class="ln" style="color:#B3261E"><b style="font-size:14px">Log out</b><span class="r">›</span></div></div>
+</div>
+ <nav class="nav" aria-label="Main"><a href="#" aria-label="Home"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h5v-6h4v6h5V10"/></svg></a><a href="#" aria-label="Attendance"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg></a><a href="#" aria-label="Assignments"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v4h4M9 13h6M9 17h6"/></svg></a><a href="#" class="on" aria-label="Profile"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a></nav>
+ <div class="ov" id="ovS"><div class="sc">
+  <div class="oh"><button class="back" data-close aria-label="Back">‹</button><div><b>Students</b><small>Grade 8-B · 32 students</small></div></div>
+  <div class="srch"><svg class="ico" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input id="sq" placeholder="Search by name or roll no."></div>
+  <div class="ft"><button><svg class="ico" viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>Attendance report</button><button><svg class="ico" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>Parent contacts</button><button><svg class="ico" viewBox="0 0 24 24"><path d="M5 4h14v12l-4 4H5zM15 20v-4h4M8 9h8M8 13h5"/></svg>Add remark</button></div>
+  <div class="wc" id="stuList" style="margin-top:12px"></div>
+  <div class="lg"><span><i style="background:#12794A"></i>Present today</span><span><i style="background:#E5484D"></i>Absent today</span></div>
+ </div></div>
+ <div class="ov" id="ovL"><div class="sc">
+  <div class="oh"><button class="back" data-close aria-label="Back">‹</button><div><b>Leave</b><small>Apply and track requests</small></div></div>
+  <div style="display:flex;gap:8px;margin-top:14px"><div class="lv"><b>8</b><span> / 12</span><br><span>Casual left</span><div class="bar"><i style="width:67%"></i></div></div><div class="lv"><b>5</b><span> / 8</span><br><span>Sick left</span><div class="bar"><i style="width:62%"></i></div></div></div>
+  <div class="sec">Apply for leave</div>
+  <div class="wc" style="padding:14px"><div class="ty" id="ty"><button class="on">Casual</button><button>Sick</button><button>Other</button></div>
+   <div style="display:flex;gap:8px"><div style="flex:1"><label class="fl">From</label><input class="in" type="date" id="df" value="2026-11-09"></div><div style="flex:1"><label class="fl">To</label><input class="in" type="date" id="dtt" value="2026-11-10"></div></div>
+   <label class="fl">Reason</label><textarea class="in" placeholder="Add a short reason"></textarea>
+   <button class="btn" id="lsub">Submit request</button></div>
+  <div class="sec">Recent requests</div>
+  <div class="wc" id="lreq"><div class="ln"><div><b>Casual leave</b><small>9 – 10 Nov · 2 days</small></div><span class="tag" style="margin-left:auto;background:#FDF0D0;color:#7A4B00">Pending</span></div><div class="ln"><div><b>Sick leave</b><small>28 Oct · 1 day</small></div><span class="tag" style="margin-left:auto;background:#DDF3E6;color:#12794A">Approved</span></div><div class="ln"><div><b>Casual leave</b><small>12 – 13 Oct · 2 days</small></div><span class="tag" style="margin-left:auto;background:#DDF3E6;color:#12794A">Approved</span></div></div>
+ </div></div>
+</div>
+<script>
+var S=[["AM","Aarav Mehta","01",1],["AS","Ananya Singh","02",1],["DP","Dev Patel","03",1],["IR","Ishita Roy","04",0],["KK","Kabir Khan","05",1],["MN","Meera Nair","06",1]];
+function drawRows(){var h="";S.forEach(function(s,i){h+='<div class="row"><div class="av">'+s[0]+'</div><div class="nm"><b>'+s[1]+'</b><span>Roll '+s[2]+'</span></div><div class="seg"><button class="p'+(s[3]?' on':'')+'" data-i="'+i+'" data-v="1">Present</button><button class="a'+(s[3]?'':' on')+'" data-i="'+i+'" data-v="0">Absent</button></div></div>'});
+document.getElementById("rows").innerHTML=h;var p=19,a=2;S.forEach(function(s){s[3]?p++:a++});document.getElementById("cp").textContent=p;document.getElementById("ca").textContent=a}
+document.getElementById("rows").addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;S[+b.dataset.i][3]=+b.dataset.v;drawRows()});
+drawRows();
+var C={"8-A":{n:32,h:[["Number patterns worksheet","Due Thu, 5 Nov","3 to review","#FDF0D0","#7A4B00",20]]},
+"8-B":{n:32,h:[["Mensuration practice","Due today","Due today","#FDE3E0","#9B1C1C",29],["Algebraic expressions · Ex 3.1","Due Fri, 6 Nov","3 days left","#E4EBFB","#1D3FA6",12]]},
+"9-A":{n:31,h:[["Coordinate geometry · Ex 3","Due Mon, 9 Nov","7 days left","#E4EBFB","#1D3FA6",4]]},
+"9-B":{n:30,h:[["Linear graphs worksheet","Due Fri, 6 Nov","4 days left","#E4EBFB","#1D3FA6",7]]},
+"10-A":{n:34,h:[["Quadratic equations · Ex 4.2","Due Wed, 4 Nov","5 to review","#FDF0D0","#7A4B00",18]]}};
+var cur="8-B",dd=document.getElementById("dd");
+function drawAsg(){var c=C[cur],h="";c.h.forEach(function(x){h+='<div class="card"><div class="t"><div><b>'+x[0]+'</b><small>'+cur+' · '+x[1]+'</small></div><span class="tag" style="background:'+x[3]+';color:'+x[4]+'">'+x[2]+'</span></div><div class="bar"><i style="width:'+Math.round(x[5]/c.n*100)+'%"></i></div><div class="cap">'+x[5]+' / '+c.n+' submitted</div></div>'});
+document.getElementById("cards").innerHTML=h;document.getElementById("ddv").textContent="Class "+cur;document.getElementById("crt").textContent="New homework for "+cur;
+var m="";Object.keys(C).forEach(function(k){m+='<button role="option" data-c="'+k+'" class="'+(k==cur?'sel':'')+'">Class '+k+'<span>'+C[k].n+' students</span></button>'});document.getElementById("menu").innerHTML=m}
+document.getElementById("ddb").onclick=function(){dd.classList.toggle("open")};
+document.getElementById("menu").onclick=function(e){var b=e.target.closest("button");if(!b)return;cur=b.dataset.c;dd.classList.remove("open");drawAsg()};
+drawAsg();
+</script>
+<script>
+var ST=[["AM","Aarav Mehta","01",96,1],["AS","Ananya Singh","02",98,1],["DP","Dev Patel","03",91,1],["IR","Ishita Roy","04",78,0],["KK","Kabir Khan","05",94,1],["MN","Meera Nair","06",89,1]];
+function drawStu(q){var h="";ST.forEach(function(s){if(q&&(s[1]+" "+s[2]).toLowerCase().indexOf(q)<0)return;var low=s[3]<80;h+='<div class="stu"><div class="sr"><div class="av">'+s[0]+'</div><div><b>'+s[1]+'</b><small>Roll '+s[2]+' · '+s[3]+'% attendance</small></div>'+(low?'<span class="tag" style="margin-left:auto;background:#FDE3E0;color:#9B1C1C">Low</span>':'')+'<i class="sd" style="margin-left:'+(low?'8px':'auto')+';background:'+(s[4]?'#12794A':'#E5484D')+'"></i></div><div class="acts"><button>Call parent</button><button>Message</button><button>Attendance</button><button>Remark</button></div></div>'});document.getElementById("stuList").innerHTML=h||'<div style="padding:20px;text-align:center;color:#4A5675;font-size:13px">No student found</div>'}
+drawStu("");
+document.getElementById("sq").addEventListener("input",function(){drawStu(this.value.toLowerCase().trim())});
+document.addEventListener("click",function(e){var o=e.target.closest("[data-open]");if(o){document.getElementById(o.dataset.open).classList.add("open");return}
+var c=e.target.closest("[data-close]");if(c){c.closest(".ov").classList.remove("open");return}
+var r=e.target.closest(".sr");if(r){r.parentNode.classList.toggle("open");return}
+var t=e.target.closest("#ty button");if(t){document.querySelectorAll("#ty button").forEach(function(b){b.classList.remove("on")});t.classList.add("on")}});
+document.getElementById("lsub").onclick=function(){var ty=document.querySelector("#ty button.on").textContent,f=new Date(document.getElementById("df").value),t=new Date(document.getElementById("dtt").value);if(isNaN(f)||isNaN(t)||t<f)return;var fm=function(d){return d.toLocaleDateString("en-GB",{day:"numeric",month:"short"})},n=Math.round((t-f)/864e5)+1;
+var d=document.createElement("div");d.className="ln";d.innerHTML='<div><b>'+ty+' leave</b><small>'+fm(f)+(n>1?' – '+fm(t):'')+' · '+n+(n>1?' days':' day')+'</small></div><span class="tag" style="margin-left:auto;background:#FDF0D0;color:#7A4B00">Pending</span>';document.getElementById("lreq").prepend(d)};
+</script>
+</body></html>

@@ -21,6 +21,10 @@ services:
         value: 361795646498279
       - key: CLOUDINARY_API_SECRET
         value: IJxN54api3g569kKqZBcPBVX1kQ
+      - key: RAZORPAY_KEY_ID
+        value: rzp_test_placeholder
+      - key: RAZORPAY_KEY_SECRET
+        value: rzp_secret_placeholder
       - key: RATE_LIMIT_MAX_REQUESTS
         value: 300
       - key: RATE_LIMIT_WINDOW_MS

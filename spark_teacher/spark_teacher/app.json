@@ -58,6 +58,7 @@
       ]
     ],
     "extra": {
+      "apiUrl": "https://sparkology-backend-3zea.onrender.com/api",
       "eas": {
         "projectId": "8ce738d7-f14e-4086-a2d9-6e0b6f9724f8"
       }

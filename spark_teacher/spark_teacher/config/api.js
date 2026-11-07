@@ -1,9 +1,9 @@
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 
-// Default LAN IP of development machine (auto-detected fallback)
-const DEV_LAN_IP = '192.168.1.11';
-const DEFAULT_API_URL = process.env.EXPO_PUBLIC_API_URL || `http://${DEV_LAN_IP}:5000/api`;
+// Production Render Backend API URL
+const PRODUCTION_API_URL = 'https://sparkology-backend-3zea.onrender.com/api';
+const DEFAULT_API_URL = process.env.EXPO_PUBLIC_API_URL || PRODUCTION_API_URL;
 
 const API_CONFIG = {
   web: 'http://localhost:5000/api',
